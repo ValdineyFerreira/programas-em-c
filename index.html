@@ -10,83 +10,118 @@
             font-family: Arial, sans-serif;
             background: #e8efff;
             text-align: center;
-            padding: 30px;
+            padding: 40px 15px;
         }
 
-        .calculadora {
+        .container {
             background: white;
-            max-width: 350px;
+            max-width: 400px;
             margin: auto;
             padding: 25px;
-            border-radius: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            color: #2456a6;
         }
 
         input {
-            width: 80%;
-            padding: 10px;
-            margin: 8px;
+            width: 85%;
+            padding: 12px;
+            margin: 10px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            font-size: 16px;
         }
 
         button {
-            background: #2563eb;
+            background: #2456a6;
             color: white;
             padding: 12px 25px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
         }
 
         #resultado {
-            font-weight: bold;
             margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2456a6;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="calculadora">
-        <h1>Calculadora de Média</h1>
+    <div class="container">
 
-        <p>Digite suas quatro notas:</p>
+        <h1>Calculadora de Média Semestral</h1>
 
-        <input type="number" id="nota1" placeholder="Primeira nota" min="0" max="10" step="0.01">
+        <p>Digite as duas notas:</p>
 
-        <input type="number" id="nota2" placeholder="Segunda nota" min="0" max="10" step="0.01">
+        <input
+            type="number"
+            id="nota1"
+            placeholder="Primeira nota"
+            min="0"
+            max="10"
+            step="0.01"
+        >
 
-        <input type="number" id="nota3" placeholder="Terceira nota" min="0" max="10" step="0.01">
+        <input
+            type="number"
+            id="nota2"
+            placeholder="Segunda nota"
+            min="0"
+            max="10"
+            step="0.01"
+        >
 
-        <input type="number" id="nota4" placeholder="Quarta nota" min="0" max="10" step="0.01">
+        <br>
 
-        <button onclick="calcularMedia()">Calcular média</button>
+        <button onclick="calcularMedia()">
+            Calcular média
+        </button>
 
-        <p id="resultado"></p>
+        <div id="resultado"></div>
+
     </div>
 
     <script>
         function calcularMedia() {
 
-            let n1 = Number(document.getElementById("nota1").value);
-            let n2 = Number(document.getElementById("nota2").value);
-            let n3 = Number(document.getElementById("nota3").value);
-            let n4 = Number(document.getElementById("nota4").value);
+            const nota1 = document.getElementById("nota1").value;
+            const nota2 = document.getElementById("nota2").value;
 
-            if (
-                document.getElementById("nota1").value === "" ||
-                document.getElementById("nota2").value === "" ||
-                document.getElementById("nota3").value === "" ||
-                document.getElementById("nota4").value === "" ||
-                [n1, n2, n3, n4].some(n => n < 0 || n > 10)
-            ) {
-                document.getElementById("resultado").innerText =
-                    "Digite quatro notas válidas entre 0 e 10.";
+            const resultado = document.getElementById("resultado");
+
+            if (nota1 === "" || nota2 === "") {
+                resultado.innerHTML = "Digite as duas notas!";
                 return;
             }
 
-            let media = (n1 + n2 + n3 + n4) / 4;
+            const n1 = Number(nota1);
+            const n2 = Number(nota2);
 
-            document.getElementById("resultado").innerText =
-                "Sua média é: " + media.toFixed(2);
+            if (
+                !Number.isFinite(n1) ||
+                !Number.isFinite(n2) ||
+                n1 < 0 || n1 > 10 ||
+                n2 < 0 || n2 > 10
+            ) {
+                resultado.innerHTML =
+                    "Digite notas válidas entre 0 e 10!";
+                return;
+            }
+
+            const media = (n1 + n2) / 2;
+
+            resultado.innerHTML =
+                "A média semestral é: " + media.toFixed(2);
         }
     </script>
 

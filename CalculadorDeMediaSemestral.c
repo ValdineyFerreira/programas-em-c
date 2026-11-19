@@ -1,7 +1,5 @@
 #include<stdio.h>
 int main (){
-    //Construa u  programa em C que receba duas notas de um aluno
-    //e calcule a média das notas informadas
     float nota1, nota2, media;
     printf("Digite a primeira nota: \n");
     scanf("%f",&nota1);
